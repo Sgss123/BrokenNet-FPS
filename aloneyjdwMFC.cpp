@@ -1,6 +1,6 @@
 
 // MFCApplication1Dlg.cpp: 实现文件
-//
+// 源码由<维云斯>提供
 
 #include "pch.h"
 #include "framework.h"
