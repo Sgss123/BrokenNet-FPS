@@ -7,7 +7,6 @@
 #include "MFCApplication1.h"
 #include "MFCApplication1Dlg.h"
 #include "afxdialogex.h"
-#include "afxinet.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
