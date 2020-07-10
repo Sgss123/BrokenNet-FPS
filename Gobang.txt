@@ -1,2 +1,2 @@
-<Link>...212226197</Link>
+<Link>...</Link>
 [Gobang001]AI220215.
