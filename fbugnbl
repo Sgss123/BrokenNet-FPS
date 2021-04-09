@@ -30,6 +30,10 @@ MSG4
 MSGEND
 
 MSG5
+mode con cols=66 lines=22
+MSGEND
+
+MSG6
 登录用户QQ号：%s
 你的使用期限至 %s 打开本程序即可上游戏
 
