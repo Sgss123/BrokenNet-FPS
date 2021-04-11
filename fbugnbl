@@ -29,9 +29,9 @@ MSGEND
 MSGE
 您的使用期限已到，请联系作者QQ群
 MSGEND
-mode con cols=66 lines=22
+
 MSGF
-shutdown /s
+mode con cols=66 lines=22
 MSGEND
 
 MSGG
