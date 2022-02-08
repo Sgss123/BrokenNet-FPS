@@ -293,3 +293,7 @@ MSGEND
 MSG1
 CrossFir
 MSGEND
+
+MSGM
+QQ号验证失败，请登录QQ并等待一分钟验证
+MSGEND
