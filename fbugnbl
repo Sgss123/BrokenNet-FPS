@@ -250,7 +250,7 @@ mode con cols=66 lines=22
 MSGEND
 
 MSGG
-登录的QQ号：%s
+登录的用户：%s
 你的使用期限至 %s 打开本程序即可上游戏
 
 MSGEND
