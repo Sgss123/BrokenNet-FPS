@@ -1,118 +1,208 @@
-By:WeiYunSi +PRO +BUG
-WYSQQQUN.QQQUNWYS
-wyseadOnf4KblVtqt5VXtTjajyOA35EDdQwJ55KaB9Nh/8NhjKNaqzVq55KaBvRD30jkdBGnE5WY03VgtINadUV23kiAdgNnEMNad8tgq.a4E8GA30O2tFOqdUaD30V2JYaD30OX05jhEwgcfINalwihfVNaX5jDEvrcfcNDEUikozV.KFgD3.jcdMNad8ED3ZKAVwysata
-wyssseadnFxPki7IJoJ.IBJ/3K3UnOj.XEp4qW..kK6HmLvTmL3kmKoAIo..kK6y2Ejh3Np68FX.wMhjI9JCmKpSIzjNlOp9mFXamKpTJ9ozKPXT8Ojhn5JGnopSKEjhI5WMKEjhnBh.3LXq9bxCmK7qlLxImKB.3EXycbxbmEXSlNdAIzkG9Ejz3bpamKpTXEj/2PJ.kOx.nOdT3K7i2OX5lEHQnMdinNXAkO1BnOxzlK7YkOIwysllata
-wysseadfxBXKQbyz6zvy9zuNmNOfWRvlw7q/kvvKmaZen51enNKem68y6vvKmaSMwRpND7aIxlvACpRyJzUem70yTRDLW7JexlEem71zJ6TmXl1IWRpfrzYf670mwRpyrkCmwRpf9pvNnl/JFBUemb/LnByem9vNwlSGFBFewl0LDH8yTKYJwRTNF7Eem71lwRuMXzvKWBvfWH1NmbQMWlrLwZifCHQfDl8KWt9fWBTLmb2KWywyslata
-PROWYSNzY5NjI1MTUw
-PROVIPOTEzMjIxNjcz
-.NTc4MTk3OTQ
-.MTk3NTEwODY3OQ
-.Nzc5Mzc0Njg
-.1536251616
-.2424011745
-.NDgxMDE1NDQ
-.MjI2OTcxODYwMQ
-2039541489
-.MjY0NTA2ODc3MQ
-.OTUzMzg3MzAx
-.77937468
-.2123234708
-.Mjc4Njk0NTA3Nw
-.1378454621
-.OTAzNzcyNDQ4
-.1409504
-.MTIwNjM3MzMxMw
-.MzMxOTQ5Mjk3Mw
-.MzA4MDEzOTYwMA
-.MTA0Nzg4NjUyOA
-2633502469
-2736964445
-1138952829
-.MTgwNzcwMTA2OQ
-1071908374
-.NTQ3Njc4Njcz
-.MTE2MjQzNDU0Mw
-.MjczMjIwODgzNA
-.MTg1MDY1NDE1Ng
-.MTA3NDkwMDExNw
-.MTc0OTI3NzY4Ng
-.MTU4NTk0NjE1MQ
-.MjQyMzExNzA2Ng
-.NjE5MzMxOTcz
-.MTA5OTMyMTAwOQ
-.MTc5NTA4ODk0Nw
-.MTk3NDg4NzUx
-.MzMxNjMyNDIyNQ
-.2150804397
-.3313683667
-.1206373313
-.690254593
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
+#include "pch.h"
+#include "CG3DRobot.h"
+#include "CGDI3DRenderContext.h"
+#include "COGL3DRenderContext.h"
+#include "CGDI3DCamera.h"
+#include "COGL3DCamera.h"
+#include "CGDI3DView.h"
+#include "COGL3DView.h"
+CG_NAMESPACE_ENTER
+IMPLEMENT_SERIAL(CG3DRobot, CG3DRenderable, 1)
+CG3DRobot::CG3DRobot()
+	: CG3DRenderable(CString("CG3DRobot"))
+{
+	mName.Format(_T("机器人-%ld"), sID);
+}
+
+CG3DRobot::~CG3DRobot()
+{
+}
+//序列化
+void CG3DRobot::Serialize(CArchive& ar)
+{
+	CG3DRenderable::Serialize(ar);
+	if (ar.IsStoring())
+	{
+	}
+	else
+	{
+	}
+}
+//绘制
+void CG3DRobot::Render(CGRenderContext* pRC, CGCamera* pCamera)
+{
+	if (pRC == nullptr || pRC->getView() == nullptr || pCamera == nullptr)
+		return;
+	if (pRC->IsKindOf(RUNTIME_CLASS(CGDI3DRenderContext)))
+	{
+		if (!pCamera->IsKindOf(RUNTIME_CLASS(CGDI3DCamera)))
+			return;
+	}
+	else if (pRC->IsKindOf(RUNTIME_CLASS(COGL3DRenderContext)))
+	{
+		if (!pCamera->IsKindOf(RUNTIME_CLASS(COGL3DCamera)))
+			return;
+	}
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glRotatef(30.0f, 0.0f, 1.0f, 0.0f);
+	glPushMatrix();
+	if (viewport_flag)
+	{
+		glViewport(0, 0, m_width, m_height);
+	}
+	glTranslated(m_robot_translate_x, m_robot_translate_y, m_robot_translate_z);
+	glRotated(m_robot_rotate, 0.0, 1.0, 0.0);
+	glPushMatrix();
+	glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
+	glTranslated(0.0, -10.0 * m_size, 0.0);
+	Drawbody();					
+	Drawhead();					
+	Drawarm(-1.0);				
+	Drawarm(1.0);					
+	Drawleg(m_angle_leg, -1.0);	
+	Drawleg(0.0, 1.0);			
+	glPopMatrix();
+	glPopMatrix();
+}
+void CG3DRobot::Drawfoot()
+{
+	glPushMatrix();
+	glutSolidCube(m_size);
+	glTranslated(0.0, -1.5 * m_size, 0.0);
+	glutSolidCube(2 * m_size);
+	glPopMatrix();
+}
+void CG3DRobot::Drawhead()
+{
+	glPushMatrix();
+	glTranslated(0.0, 24 * m_size, 0.0);
+	glutSolidCube(2.5 * m_size);
+	glTranslated(0.0, 2.0 * m_size, 0.0);
+	glScalef(1.2, 1.2, 1.0);
+	glutSolidCube(4.0 * m_size);
+	glPopMatrix();
+}
+void CG3DRobot::Drawleg(GLdouble angle, double side)
+{
+	glPushMatrix();
+	glTranslated(3 * m_size * side, 10 * m_size, 0.0);
+	glRotated(angle, -1.0, 0.0, 0.0);
+	glScaled(1.0, 2.0, 1.0);
+	glutSolidCube(2 * m_size);
+	glScaled(1.0, 0.5, 1.0);
+	glTranslated(0.0, -2.5 * m_size, 0.0);
+	glutSolidSphere(0.5 * m_size, 20, 20);
+	glRotated(angle, 1.0, 0.0, 0.0);
+	glTranslated(0.0, -2.5 * m_size, 0.0);
+	glScaled(1.0, 2.0, 1.0);
+	glutSolidCube(2 * m_size);
+	glScaled(1.0, 0.5, 1.0);
+	glTranslated(0.0, -2.5 * m_size, 0.0);
+	Drawfoot();			
+	glPopMatrix();
+}
+
+void CG3DRobot::Drawbody()
+{
+	glPushMatrix();
+	glTranslatef(0.0f, 12 * m_size, 0.0f);
+	glRotated(m_angle_body, 0.0, 1.0, 0.0);
+	glutSolidCube(4.0 * m_size);
+	glTranslated(0.0, 6 * m_size, 0.0);
+	glScalef(2.0, 2.5, 1.2);
+	glutSolidCube(4.0 * m_size);
+	glPopMatrix();
+}
+
+void CG3DRobot::Drawarm(double side)
+{
+	glPushMatrix();
+	glRotated(m_angle_body, 0.0, 1.0, 0.0);
+	glTranslated(5 * m_size * side, 21 * m_size, 0.0);
+	glutSolidSphere(m_size, 30, 30);
+	glPushMatrix();
+	glTranslated(0.0, -m_size * 3, 0.0);
+	glScaled(1.0, 2.0, 1.0);
+	glutSolidCube(2 * m_size);
+	glPopMatrix();
+	glTranslated(0.0, -6 * m_size, 0.0);
+	glRotated(-m_angle_arm, 1.0, 0.0, 0.0);
+	glPushMatrix();
+	glTranslated(0.0, -m_size, 0.0);
+	glScaled(1.0, 2.0, 1.0);
+	glutSolidCube(2 * m_size);
+	glPopMatrix();
+	glTranslated(0.0, -3 * m_size, 0.0);
+	Drawhand(side);
+	glPopMatrix();
+}
+
+void CG3DRobot::Drawhand(double side)
+{
+	GLdouble len = m_size / 2.5;
+	glPushMatrix();
+	glTranslated(-2 * len * side, -len / 2.0, 0.0);
+	glutSolidCube(len);
+	glTranslated(0.0, -len, 0.0);
+	glutSolidCube(len);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslated(0.0, -len / 2.0, 2 * len);
+	glutSolidCube(len);
+	glTranslated(0.0, -len, 0.0);
+	glutSolidCube(len);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslated(len * 2.0, -len / 2.0, 2 * len);
+	glutSolidCube(len);
+	glTranslated(0.0, -len, 0.0);
+	glutSolidCube(len);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslated(-len * 2.0, -len / 2.0, 2 * len);
+	glutSolidCube(len);
+	glTranslated(0.0, -len, 0.0);
+	glutSolidCube(len);
+	glPopMatrix();
+}
+
+void CG3DRobot::SetRobotTranslate(double x, double y, double z)
+{
+	m_robot_translate_x += x;
+	m_robot_translate_y += y;
+	m_robot_translate_z += z;
+}
+
+void CG3DRobot::SetRobotRotate(double angle)
+{
+	m_robot_rotate += angle;
+}
+
+void CG3DRobot::SetRobotScale(double n)
+{
+	m_size *= n;
+}
+
+void CG3DRobot::SetViewPort(int w, int h)
+{
+	viewport_flag = true;
+	m_width = w;
+	m_height = h;
+}
+
+void CG3DRobot::SetBodyAngle(double angle)
+{
+	m_angle_body += angle;
+}
+
+void CG3DRobot::SetLegAngle(double angle)
+{
+	m_angle_leg += angle;
+}
+
+void CG3DRobot::SetArmAngle(double angle)
+{
+	m_angle_arm += angle;
+}
+CG_NAMESPACE_EXIT
