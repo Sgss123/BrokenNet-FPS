@@ -1,67 +1,329 @@
-#include "pch.h"
-#include "CG3DSphere.h"
-#include "CGDI3DRenderContext.h"
-#include "COGL3DRenderContext.h"
-#include "CGDI3DCamera.h"
-#include "COGL3DCamera.h"
-#include "CGDI3DView.h"
-#include "COGL3DView.h"
-CG_NAMESPACE_ENTER
-IMPLEMENT_SERIAL(CG3DSphere, CG3DRenderable, 1)
-CG3DSphere::CG3DSphere()
-	: CG3DRenderable(CString("CG3DSphere")), mRadius(50)
-{
-	mName.Format(_T("球体-%ld"), sID);
-}
-CG3DSphere::CG3DSphere(double r)
-	: CG3DRenderable(CString("CG3DSphere")), mRadius(r)
-{
-	mName.Format(_T("球体-%ld"), sID);
-}
-CG3DSphere::CG3DSphere(const CG3DSphere& other)
-	: CG3DRenderable(CString("CG3DSphere")), mRadius(other.mRadius)
-{
-	mName.Format(_T("球体-%ld"), sID);
-}
-CG3DSphere::~CG3DSphere()
-{
-}
-//序列化
-void CG3DSphere::Serialize(CArchive& ar)
-{
-	CG3DRenderable::Serialize(ar);
-	if (ar.IsStoring())
-	{
-	}
-	else
-	{
-	}
-}
-void CG3DSphere::Render(CGRenderContext* pRC, CGCamera* pCamera)
-{
-	if (pRC == nullptr || pRC->getView() == nullptr || pCamera == nullptr)
-		return;
-	if (pRC->IsKindOf(RUNTIME_CLASS(CGDI3DRenderContext)))
-	{
-		if (!pCamera->IsKindOf(RUNTIME_CLASS(CGDI3DCamera)))
-			return;
-	}
-	else if (pRC->IsKindOf(RUNTIME_CLASS(COGL3DRenderContext)))
-	{
-		if (!pCamera->IsKindOf(RUNTIME_CLASS(COGL3DCamera)))
-			return;
-		mAppearance.apply(0, pCamera, pRC); //应用外观
-		mPolygonMode.apply(0, pCamera, pRC);//应用多边形绘制模式
-		glPushMatrix(); //保存当前的坐标系
-		glMultMatrixd(mMat.ptr()); //图形变换（如果之前不保存坐标系，该变换会影响坐标系）
-		//此处仅作为绘制示例：
-		//使用glut库
-		//glutSolidSphere(mRadius, mSlices, mStacks);
-		//使用glu库
-		GLUquadricObj * objSphere = gluNewQuadric();
-		gluSphere(objSphere, mRadius, mSlices, mStacks);
-		gluDeleteQuadric(objSphere);
-		glPopMatrix(); //恢复原有坐标系
-	}
-}
-CG_NAMESPACE_EXIT
+ Error!!!!!
+Cracking the software will make the function invalid!!!
+You are using pirated software, this is just a shell!!!
+Abnormal data inside the program, please pay attention not to be cheated!!!
+~.
+.2513912163 2022-06-08 20:00:00
+.1365366961 2022-06-23 23:59:59
+.1965947415 F
+.2590844260 F
+.2939862826 F
+.1490417496 F
+.706521895 F
+.3474131701 F
+.824523404 F
+.1046508025 F
+.2424011745 F
+.3187857155 F
+.3221111114 F
+.1013929452 F
+.741758374 F
+.1546302108 F
+.3320784822 F
+.1593866703 F
+.450290767 F
+.2840682902 F
+.1743571929 F
+.3118383259 F
+.781696767 F
+.1291478199 F
+.10286746 F
+.1071908374 F
+.2211523726 F
+.1031446331 F
+.258701979 F
+.2320652054 F
+.1530822114 F
+.2289680345 F
+.2038727630 F
+.960812201 F
+.2842766650 F
+.2777892151 F
+.1585856014 F
+.1520178889 F
+.2912116616 F
+.2269718601 F
+.2976055288 F
+.3494421720 F
+.1021235984 F
+.1533878600 F
+.199780621 F
+.1519753927 F
+.1848094866 F
+.18734447 F
+.755126961 F
+.2965106045 F
+.137096944 F
+.197488751 F
+.166724714 F
+.1084658168 F
+.191555927 F
+.9740317 F
+.2531826248 F
+.2265537779 F
+.1278067404 F
+.2786945077 F
+.58879511 F
+.1424386 F
+.1264148367 F
+.1803866204 F
+.787439642 F
+.751500554 F
+.1453811722 F
+.2237580074 F
+.1220037402 F
+.1903137202 F
+.2150804397 F
+.296905585 F
+.1755856326 F
+.2601748309 F
+.755126961 F
+.2696669502 F
+.903772448 F
+.845553888 F
+.1748580733 F
+.3195258086 F
+.1123765531 F
+.2197314149 F
+.286980536 F
+.806520396 F
+.458491629 F
+.1609004096 F
+.1501749205 F
+.957716666 F
+.9582437 F
+.2283124066 F
+.516612674 F
+.2023762962 F
+.420946465 F
+.1010937898 F
+.1807919331 F
+.690254593 F
+.1953075078 F
+.913221673 F
+.1972863663 F
+.755126961 F
+.594060504 F
+.1114229760 F
+.2046160278 F
+.1807018445 F
+.1465694822 F
+.2572527283 F
+.2110727410 F
+.936328881 F
+.2183521093 F
+.744794554 F
+.1792407961 F
+.1549796797 F
+.1453635248 F
+.1517126635 F
+.993759619 F
+.914572519 F
+.1069446871 F
+.898718384 F
+.1341751301 F
+.183328420 F
+.180446285 F
+.2228603840 F
+.3507908010 F
+.1732690070 F
+.616235339 F
+.1304065742 F
+.1807755080 F
+.1975109678 F
+.3337016719 F
+.1749277686 F
+.211685050 F
+.2542164694 F
+.1131187530 F
+.2322919870 F
+.1329008890 F
+.819282821 F
+.3238947042 F
+.724228276 F
+.740869200 F
+.1874759295 F
+.871080628 F
+.3319492973 F
+.375576314 F
+.769625150 F
+.382846171 F
+.735818955 F
+.1150921403 F
+.653611572 F
+.1570638624 F
+.627331190 F
+.82925992 F
+.2052166760 F
+.953387301 F
+.302566275 F
+.2033364800 F
+.2170318949 F
+.1405722432 F
+.352809551 F
+.256954797 F
+.644279271 F
+.2463753357 F
+.1321747251 F
+.1519185784 F
+.3187857155 F
+.1812113108 F
+.1325122168 F
+.166570017 F
+.326393542 F
+.941121416 F
+.692602621 F
+.2575778065 F
+.3176686831 F
+.765454799 F
+.2739917057 F
+.2578000978 F
+.3073720098 F
+.405802097 F
+.804936244 F
+.1942839256 F
+.2796765340 F
+.806666250 F
+.19277-08453 F
+.837199815 F
+.190875007 F
+.378305181 F
+.760727191 F
+.2905643561 F
+.2779279740 F
+.1529018440 F
+.1760473808 F
+.1243247281 F
+.1771882594 F
+.3410801860 F
+.505573687 F
+.3612243692 F
+.2369360467 F
+.3293601967 F
+.839283329 F
+.1909901227 F
+.2258018109 F
+.50157044 F
+.2818785872 F
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+$dQ#
+By:提示WYS bilibili<维云斯> FFFFFFFFBUG AU-THOR ++jqm+
+BCMyUnAeUnuJUnSQULOQUL26UnA7UnA6AdEQ
+jCMyG7AyG7QjG7q8GJa8GJueG7AfG7AeBdEQ
+AWYSQQQUNQQQUNWYSA
+
+MSGA
+
+MSGEND
+
+MSGB
+请输入卡密(按回车登录)：
+MSGEND
+
+MSGC
+链接:https://www.lanzoup.com/b030ogk4d
+密码:6666
+软件有更新，请前往链接下载
+MSGEND
+
+MSGD
+软件可能被盗版者或病毒恶意篡改，请联系作者QQ群
+MSGEND
+
+MSGE
+您的使用期限已到，请联系作者QQ群
+MSGEND
+
+MSGF
+mode con cols=66 lines=22
+MSGEND
+
+MSGG
+登录的用户：%s
+你的使用期限至 %s 打开本程序即可上游戏
+
+MSGEND
+
+MSGH
+***************************************************************
+* 操作：进入单人人机模式后 → 长按F9一秒 ← 开启BUG不掉血即可 *
+***************************************************************
+正在检测穿越火线，请登录游戏...
+MSGEND
+
+MSGI
+已检测到穿越火线运行
+现在进入单人人机模式后 → 长按F9一秒 ← 开启BUG不掉血...
+MSGEND
+
+MSGJ
+正在尝试开启BUG不掉血...
+MSGEND
+
+MSGK
+CF永久无视更新及错误代码BUG不掉血(C++版)
+MSGEND
+
+MSGL
+该BUG不掉血全版本通用且无视游戏更新及错误代码24-15
+MSGEND
+
+MSGM
+C:\Windows\dmp.sys
+MSGEND
+
+MSGN
+QQ号验证失败，请登录QQ并等待一分钟验证
+MSGEND
+
+MSG0
+┏======================================================┓
+┃                                                      ┃
+┃          BUG不掉血及无视错误代码24-15已开启          ┃
+┃                                                      ┃
+┗======================================================┛
+MSGEND
+
+MSG1
+CrossFir
+MSGEND
