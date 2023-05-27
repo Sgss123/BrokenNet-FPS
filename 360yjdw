@@ -1,7 +1,7 @@
 #include <stdio.h>//输入输出头文件
 #include <windows.h>//WinAPI所需头文件
 
-/*360一键断网最简单的写法源码及注释由<维云斯>QQ群：632726473提供，允许分享，禁止倒卖*/
+/*360一键断网最简单的写法源码及注释由<Sgss>提供，允许分享，禁止倒卖*/
 
 //HWND为窗口句柄类型
 HWND GetMouseWindow()//对应易语言的：取鼠标所在窗口句柄()
@@ -35,10 +35,10 @@ void Net(HWND h360, int recovery)//断网或联网，h360为360列表控件句�
 int main()
 {
 	HWND h360;//声明窗口句柄类型变量
-	int qqqun = 632726473;
+	int qqqun = 838090635;
 	int key = 18;//18为Alt的键代码 
 	int keydown = 0, recovery = 0;//按键是否按下和断网恢复状态 
-	printf("360一键断网C语言免费版由<bilibili:维云斯>提供\n禁止盗卖,更多高端功能见QQ群:%d",qqqun);//作者声明
+	printf("360一键断网C语言免费版由<bilibili:Sgss--->提供\n禁止盗卖,更多高端功能见QQ群:%d",qqqun);//作者声明
 	printf("\n按Alt一键断网/恢复");
 	printf("\n正在检测360流量防火墙...");
 	while (1)//以300ms的间隔循环扫描屏幕是否有360流量防火墙
